@@ -25,21 +25,37 @@
     <link rel="stylesheet" href="{{url('admin/assets/css/style.css')}}">
     <!--    Favicon-->
     <link rel="shortcut icon" href="{{url('admin/assets/images/favicon.png')}}" type="image/x-icon">
+    <!--    jQuery-->
+    <script src="{{url('admin/assets/js/jquery-3.4.1.min.js')}}"></script>   
+<!--     <script src="{{url('admin/assets/js/jquery-3.3.1.slim.min.js')}}"></script> -->
 </head>
 <body>
 <!--Header Start-->
 <section>
+    @if(isset($header))
+    <div class="col-sm-12 text-center header pb-1">
+        <h2 class="font-weight-bold p-1 m-0">{{$header->owner_name}}</h2>
+        <h5 class="menu-bg p-2 pl-3 pr-3 mb-1">{{$header->owner_department}}</h5>
+        <p class="font-weight-bold mb-0">{{$header->address}}</p>
+        <p class="font-weight-bold mb-0">Mobile: {{$header->mobile}}</p>
+    </div>
+    @else
     <div class="col-sm-12 text-center header pb-1">
         <h2 class="font-weight-bold p-1 m-0">Web Site Title</h2>
         <h5 class="menu-bg p-2 pl-3 pr-3 mb-1">Web Sub Title</h5>
         <p class="font-weight-bold mb-0">215/4/A/3, East-Rampura, Dhaka-1209</p>
         <p class="font-weight-bold mb-0">Mobile: 880-1722454519</p>
     </div>
+    @endif
 </section>
 <!--Header End-->
 
 <!--User Avatar Start-->
+@if(empty($user->avatar))
 <img class="avatar" src="{{url('admin/assets/images/avatar.png')}}" alt="Avatar">
+@else
+<img class="avatar" src="{{url('admin/assets/images/'.$user->avatar)}}" alt="Avatar">
+@endif
 <!--User Avatar Start-->
 
 <!--Main Menu Start-->
@@ -52,21 +68,21 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.html"><span class="fa fa-home"></span> Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{route('home')}}"><span class="fa fa-home"></span> Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Student
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li class=""><a class="dropdown-item" href="form.html">Registration</a></li>
+                    <li class=""><a class="dropdown-item" href="{{route('student-registration-form')}}">Registration</a></li>
                     <li class=""><a class="dropdown-item" href="table.html">Batch Wise List</a></li>
                     <li class=""><a class="dropdown-item" href="#">Class Wise List</a></li>
                 </ul>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="gallery.html">Gallery</a>
+                <a class="nav-link" href="{{route('photo-gallery')}}">Gallery</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -77,24 +93,45 @@
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle" href="#">School</a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-item">Add School</a></li>
-                            <li><a href="#" class="dropdown-item">School List</a></li>
+                            <li><a href="{{route('add-school')}}" class="dropdown-item">Add School</a></li>
+                            <li><a href="{{route('school-list')}}" class="dropdown-item">School List</a></li>
                         </ul>
                     </li>
 
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle" href="#">Class</a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-item">Add Class</a></li>
-                            <li><a href="#" class="dropdown-item">Class List</a></li>
+                            <li><a href="{{route('add-class')}}" class="dropdown-item">Add Class</a></li>
+                            <li><a href="{{route('class-list')}}" class="dropdown-item">Class List</a></li>
                         </ul>
                     </li>
 
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle" href="#">Batch</a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-item">Add Batch</a></li>
-                            <li><a href="#" class="dropdown-item">Batch List</a></li>
+                            <li><a href="{{route('add-batch')}}" class="dropdown-item">Add Batch</a></li>
+                            <li><a href="{{route('batch-list')}}" class="dropdown-item">Batch List</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item" href="{{route('student-type')}}">Student Type</a>
+                        
+                    </li>
+                   <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">Slider</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('add-slide')}}" class="dropdown-item">Add Slide</a></li>
+                            <li><a href="{{route('manage-slide')}}" class="dropdown-item">Manage Slide</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">General</a>
+                        <ul class="dropdown-menu">
+                            @if(empty($header->id))
+                             <li><a href="{{route('add-header-footer')}}" class="dropdown-item">Add Header & Footer</a></li>
+                            @else
+                             <li><a href="{{route('manage-header-footer',['id'=>$header->id])}}" class="dropdown-item">Manage Header & Footer</a></li>
+                            @endif
                         </ul>
                     </li>
                     <li class="dropdown-submenu">

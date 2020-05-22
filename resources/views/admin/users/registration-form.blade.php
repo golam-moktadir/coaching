@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('admin.master',['user'=>$user])
 @section('main-content')
 <section class="container-fluid">
     <div class="row content registration-form">

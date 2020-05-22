@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Image;
 class UserRegistrationController extends Controller
 {
     public function showRegistrationForm(){
@@ -17,10 +18,8 @@ class UserRegistrationController extends Controller
         return redirect('/home');
     }
     public function userSave(Request $request){
-    	        $this->validator($request->all())->validate();
-
+    	$this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
-
         $users = User::all();
         return view('admin.users.user-list',['users'=>$users]);
     }
@@ -70,7 +69,7 @@ class UserRegistrationController extends Controller
         $user->mobile = $request->mobile;
         $user->email = $request->email;
         $user->save();
-        return redirect('user-profile/'.$request->id)->with('message','Operation Successfull');
+        return redirect('user-profile/'.$request->id)->with('message','Operation Successful');
     }
     public function ChangeUserAvatar($id){
         $user = User::find($id);
@@ -78,7 +77,34 @@ class UserRegistrationController extends Controller
     }
     public function updateUserPhoto(Request $request){
 
-        echo $request->avatar->store('files');
-       // $user = User::find($request->id);
+        $avatar = mt_rand().$request->avatar->getClientOriginalName();
+        Image::make($request->avatar)->resize(300,300)->save("admin/assets/images/$avatar");
+
+        $user = User::find($request->id);
+        $user->avatar = $avatar;
+        $user->save();
+        return redirect('user-profile/'.$request->id)->with('message','Operation Successful');       
+        //$avatar = $request->avatar->store('files');
+    }
+    public function changeUserPassword($id){
+        return view('admin.users.change-user-password',['id'=>$id]);
+    }
+    public function userPasswordUpdate(Request $request){
+        $this->validate($request,[
+                            'new_password'=>'required|string|min:5'
+                        ]);
+
+        $oldPassword = $request->password;
+        $user = User::find($request->id);
+
+        if(Hash::check($oldPassword,$user->password)){
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return redirect('user-profile/'.$request->id)->with('message','Operation Successful');       
+
+        }
+        else{
+            return redirect('user-profile/'.$request->id)->with('error_message','Old password does not match');       
+        }
     }
 }

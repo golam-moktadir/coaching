@@ -29,7 +29,7 @@
             	@csrf
                 <div class="form-group col-12 mb-3">
                     <label for="fatherMobile" class="col-sm-3 col-form-label text-right">Mobile Number</label>
-                    <input type="text" name="mobile" placeholder="8801xxxxxxxx" class="form-control col-sm-9 @error('mobile') is-invalid @enderror" value="{{ old('mobile') }}" id="mobile" minlength="8" required autofocus>
+                    <input type="text" name="mobile" placeholder="01xxxxxxxx" class="form-control col-sm-9 @error('mobile') is-invalid @enderror" value="{{ old('mobile') }}" id="mobile" minlength="8" required autofocus>
                     @error('mobile')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
