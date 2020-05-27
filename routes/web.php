@@ -182,6 +182,58 @@ Route::group(['middleware'=>['auth']], function(){
 		'uses'=>'StudentController@batchRollForm',
 		'as'=>'batch-roll-form'
 	]);
+	Route::post('/student/registration-form',[
+		'uses'=>'StudentController@studentSave',
+		'as'=>'student-save'
+	]);
+	Route::get('/student/all-running-student-list',[
+		'uses'=>'StudentController@allRunningStudentList',
+		'as'=>'all-running-student-list'
+	]);
+	Route::get('/student/class-selection-form',[
+		'uses'=>'StudentController@classSelectionForm',
+		'as'=>'class-selection-form'
+	]);
+	Route::get('/student/course-wise-student',[
+		'uses'=>'StudentController@classAndTypeWiseStudent',
+		'as'=>'course-wise-student'
+	]);
+	Route::get('/student/details/{id}',[
+		'uses'=>'StudentController@studentDetails',
+		'as'=>'student-details'
+	]);
+
+
+	Route::get('/student/batch-selection-form',[
+		'uses'=>'StudentController@batchSelectionForm',
+		'as'=>'batch-selection-form'
+	]);
+	Route::get('/student/course-wise-batch',[
+		'uses'=>'StudentController@courseWiseBatch',
+		'as'=>'course-wise-batch'
+	]);
+	Route::get('/student/batch-wise-student-list',[
+		'uses'=>'StudentController@batchWiseStudentList',
+		'as'=>'batch-wise-student-list'
+	]);
+	// Student Attendance
+	Route::get('/attendance/add-attendance',[
+		'uses'=>'StudentAttendanceController@addAttendance',
+		'as'=>'add-attendance'
+	]);
+	Route::get('/attendance/batch-wise-student-list-for-attendance',[
+		'uses'=>'StudentAttendanceController@batchWiseStudentListForAttendance',
+		'as'=>'batch-wise-student-list-for-attendance'
+	]);
+	Route::post('/attendance/add-attendance',[
+		'uses'=>'StudentAttendanceController@saveStudentAttendance',
+		'as'=>'save-student-attendance'
+	]);
+	//Date Management
+	Route::get('/date/add-year',[
+		'uses'=>'DateManagementController@addYear',
+		'as'=>'add-year'
+	]);
 });
 Auth::routes();
 

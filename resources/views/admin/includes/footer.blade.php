@@ -41,7 +41,6 @@
                         var response = JSON.parse(response);
                         var message = response.message;                   
                         window.location='http://localhost/coaching/public/student-type'; 
-                      //  window.location.reload(true);
                     }
                 });
             });  
@@ -74,8 +73,57 @@
                     url:"{{route('bring-student-type')}}",
                     data:{class_id:class_id},
                     success:function(response){
-                        console.log(response);
                         $('#batchInfo').html(response);
+                    }
+                });
+            });
+            $('#typeId').change(function(){
+                var typeId = $(this).val();
+                $.ajax({
+                    url: "{{route('course-wise-student')}}",
+                    data:{type_id:typeId},
+                    success:function(value){
+                        $('#studentList').html(value);              
+                    }            
+                });
+            });
+
+            $('#typeId').change(function(){
+                var typeId = $(this).val();
+                $.ajax({
+                    url:"{{route('course-wise-batch')}}",
+                    data:{type_id:typeId},
+                    success:function(value){
+                      //  console.log(value);
+                        $('#batchId').html(value);
+                    }
+                });
+            });
+
+            $('#batchId').change(function(){
+                var classId = $('#classId').val();
+                var typeId = $('#typeId').val();
+                var batchId = $(this).val();
+              //  console.log(typeId);
+                $.ajax({
+                    url:"{{route('batch-wise-student-list')}}",
+                    data:{class_id:classId,type_id:typeId,batch_id:batchId},
+                    success:function(value){
+                        $('#batchstudentList').html(value);
+                    }
+                });
+            });
+
+            $('#batchId').change(function(){
+                var classId = $('#classId').val();
+                var typeId = $('#typeId').val();
+                var batchId = $(this).val();
+              //  console.log(typeId);
+                $.ajax({
+                    url:"{{route('batch-wise-student-list-for-attendance')}}",
+                    data:{class_id:classId,type_id:typeId,batch_id:batchId},
+                    success:function(value){
+                        $('#batchstudentListForAttendance').html(value);
                     }
                 });
             });

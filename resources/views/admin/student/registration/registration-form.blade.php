@@ -3,18 +3,26 @@
 <section class="container-fluid">
     <div class="row content">
             <div class="col-12 pl-0 pr-0">
+                @if(Session::get('message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Message : </strong> {{ Session::get('message') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
                 <div class="form-group">
                     <div class="col-sm-12">
                         <h4 class="text-center font-weight-bold font-italic mt-3">New Student Registration Form</h4>
                     </div>
                 </div>
-                <form action="" method="post" enctype="multipart/form-data" class="form-inline">
+                <form action="{{route('student-save')}}" method="post" enctype="multipart/form-data" class="form-inline">
                     <div class="form-group col-md-6 mb-3">
                         <label for="studentName" class="col-sm-4 col-form-label text-right">Student Name</label>
                         <input type="text" name="student_name" class="form-control col-sm-8" placeholder="Student Name" value="" id="studentName" required>
                         <span class="text-danger"></span>
                     </div>
-
+                    @csrf
                     <div class="form-group col-md-6 mb-3">
                         <label for="school" class="col-sm-4 col-form-label text-right">School Name</label>
                         <select name="school_id" class="form-control col-sm-8" id="school" required>
@@ -26,22 +34,6 @@
                         </select>
                         <span class="text-danger"></span>
                     </div>
-
-                    <!-- <div class="form-group col-md-6 mb-3">
-                        <label for="classId" class="col-sm-4 col-form-label text-right">Class Name</label>
-                        <select name="class_id" class="form-control col-sm-8" id="classId" required>
-                            <option value="">Select Class</option>
-                        </select>
-                        <span class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="batchId" class="col-sm-4 col-form-label text-right">Batch</label>
-                        <select name="batch_id" class="form-control col-sm-8" id="batchId" required>
-                            <option value="">Select Batch</option>
-                        </select>
-                    </div> -->
-
                     <div class="form-group col-md-6 mb-3">
                         <label for="fatherName" class="col-sm-4 col-form-label text-right">Father's Name</label>
                         <input type="text" name="father_name" class="form-control col-sm-8" placeholder="Father's Name" value="" id="fatherName" required>

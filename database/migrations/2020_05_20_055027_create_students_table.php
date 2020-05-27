@@ -30,6 +30,8 @@ class CreateStudentsTable extends Migration
             $table->string('student_photo')->nullable();
             $table->text('address');
             $table->tinyInteger('status');
+            $table->text('password');
+            $table->text('encrypted_password');
             $table->integer('user_id');
             $table->timestamps();
         });

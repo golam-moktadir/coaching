@@ -9,11 +9,14 @@ use App\StudentType;
 class StudentTypeController extends Controller
 {
     public function index(){
-    	$student_types = DB::table('student_types')
-    					->join('class_names','student_types.class_id','=','class_names.id')
-    					->select('student_types.*','class_names.class_name')
-    					->get();
+       $student_types = DB::select('select student_types.*,class_names.class_name from student_types inner join class_names on student_types.class_id = class_names.id');
+
+    	// $student_types = DB::table('student_types')
+    	// 				->join('class_names','student_types.class_id','=','class_names.id')
+    	// 				->select('student_types.*','class_names.class_name')
+    	// 				->get();
     	$classes = ClassName::all();
+
     	return view('admin.settings.student-type.student-type-list',['student_types'=>$student_types,'classes'=>$classes]);
     	
     }
