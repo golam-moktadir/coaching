@@ -113,20 +113,6 @@
                     }
                 });
             });
-
-            $('#batchId').change(function(){
-                var classId = $('#classId').val();
-                var typeId = $('#typeId').val();
-                var batchId = $(this).val();
-              //  console.log(typeId);
-                $.ajax({
-                    url:"{{route('batch-wise-student-list-for-attendance')}}",
-                    data:{class_id:classId,type_id:typeId,batch_id:batchId},
-                    success:function(value){
-                        $('#batchstudentListForAttendance').html(value);
-                    }
-                });
-            });
         });
 </script>
 </body>

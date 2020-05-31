@@ -229,10 +229,68 @@ Route::group(['middleware'=>['auth']], function(){
 		'uses'=>'StudentAttendanceController@saveStudentAttendance',
 		'as'=>'save-student-attendance'
 	]);
+	Route::get('/attendance/view',[
+		'uses'=>'StudentAttendanceController@viewAttendance',
+		'as'=>'view-attendance'
+	]);
+	Route::get('/attendance/batch-wise-student-attendance-view',[
+		'uses'=>'StudentAttendanceController@batchWiseStudentAttendanceView',
+		'as'=>'batch-wise-student-attendance-view'
+	]);
+	Route::get('/attendance/edit',[
+		'uses'=>'StudentAttendanceController@editAttendance',
+		'as'=>'edit-attendance'
+	]);
+	Route::get('/attendance/student-list-attendance-edit',[
+		'uses'=>'StudentAttendanceController@studentListForAttendanceEdit',
+		'as'=>'student-list-for-attendance-edit'
+	]);
+	Route::post('/attendance/edit',[
+		'uses'=>'StudentAttendanceController@studentAttendanceUpdate',
+		'as'=>'student-attendance-update'
+	]);
 	//Date Management
 	Route::get('/date/add-year',[
 		'uses'=>'DateManagementController@addYear',
 		'as'=>'add-year'
+	]);
+	//Exam Management
+	Route::get('/exam/add',[
+		'uses'=>'ExamManagementController@addExamForm',
+		'as'=>'add-exam'
+	]);
+	Route::post('/exam/add',[
+		'uses'=>'ExamManagementController@addExam',
+		'as'=>'add-exam'
+	]);
+	Route::get('/exam/list',[
+		'uses'=>'ExamManagementController@ExamList',
+		'as'=>'exam-list'
+	]);
+	Route::get('/exam-list-by-ajax',[
+		'uses'=>'ExamManagementController@ExamListByAjax',
+		'as'=>'exam-list-by-ajax'
+	]);
+	Route::get('/course-wise/exam-list',[
+		'uses'=>'ExamManagementController@courseWiseExamList',
+		'as'=>'course-wise-exam-list'
+	]);
+	//Paper Management 
+	Route::get('/add-paper',[
+		'uses'=>'PaperManagementController@addPaperForm',
+		'as'=>'add-paper'
+	]);
+	Route::post('/add-paper',[
+		'uses'=>'PaperManagementController@addPaper',
+		'as'=>'add-paper'
+	]);
+	Route::get('/paper-list',[
+		'uses'=>'PaperManagementController@paperList',
+		'as'=>'paper-list'
+	]);
+	Route::get('/exam-wise-paper-list',[
+		'uses'=>'PaperManagementController@examWisePaperList',
+		'as'=>'exam-wise-paper-list'
 	]);
 });
 Auth::routes();

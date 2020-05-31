@@ -4,20 +4,13 @@
     <div class="row content">
         <div class="col-12 pl-0 pr-0">
             <div class="form-group">
+                
                 <div class="col-sm-12">
-                    <h4 class="text-center font-weight-bold font-italic mt-3">Batch Wise Student List</h4>
+                    <h4 class="text-center font-weight-bold font-italic mt-3">Batch Wise Student Attendance Edit Form</h4>
                 </div>
-                <form action="{{route('save-student-attendance')}}" method="post">
+                <form action="{{route('student-attendance-update')}}" method="post">
                     @csrf
                 <div class="row ml-0 mr-0">
-                	<div class="col">
-                		<select name="academic_session" class="form-control" id="academicSession">
-                			<option value="">--Academic Session--</option>
-                			@foreach($years as $year)
-                				<option value="{{$year->id}}">{{$year->year}} - {{$year->year+1}}</option>
-                			@endforeach
-                		</select>
-                	</div>
                     <div class="col">
                         <select name="class_id" class="form-control" id="classId">
                             <option value="">--Select Class--</option>
@@ -26,11 +19,11 @@
                             @endforeach
                         </select>
                     </div>
-                	<div class="col">
-                		<select name="type_id" class="form-control" id="typeId">
-                			<option value="">--Select Course--</option>               			
-                		</select>
-                	</div>
+                    <div class="col">
+                        <select name="type_id" class="form-control" id="typeId">
+                            <option value="">--Select Course--</option>                         
+                        </select>
+                    </div>
                     <div class="col">
                         <select name="batch_id" class="form-control" id="batchId">
                             <option value="">--Select Batch--</option>                         
@@ -39,9 +32,9 @@
                 </div>
                 <hr>
                 <div class="row ml-0 mr-0">
-                	<div class="col" id="batchstudentListForAttendance">
-                		
-                	</div>
+                    <div class="col" id="studentListForAttendanceEdit">
+                        
+                    </div>
                 </div>
                 </form>
             </div>
@@ -54,16 +47,15 @@
             var classId = $('#classId').val();
             var typeId = $('#typeId').val();
             var batchId = $(this).val();
-          //  console.log(typeId);
             $.ajax({
-                url:"{{route('batch-wise-student-list-for-attendance')}}",
+                url:"{{route('student-list-for-attendance-edit')}}",
                 data:{class_id:classId,type_id:typeId,batch_id:batchId},
                 success:function(value){
-                    $('#batchstudentListForAttendance').html(value);
+                //  console.log(value);
+                    $('#studentListForAttendanceEdit').html(value);
                 }
             });
         });
     });
 </script>
-
 @endsection

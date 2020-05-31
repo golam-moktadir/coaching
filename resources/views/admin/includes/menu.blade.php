@@ -26,6 +26,8 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <li class=""><a class="dropdown-item" href="{{route('add-attendance')}}">Add Attendance</a></li>
+                    <li class=""><a class="dropdown-item" href="{{route('view-attendance')}}">View Attendance</a></li>
+                    <li class=""><a class="dropdown-item" href="{{route('edit-attendance')}}">Edit Attendance</a></li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -58,6 +60,20 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{route('add-batch')}}" class="dropdown-item">Add Batch</a></li>
                             <li><a href="{{route('batch-list')}}" class="dropdown-item">Batch List</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">Exam</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('add-exam')}}" class="dropdown-item">Add Exam</a></li>
+                            <li><a href="{{route('exam-list')}}" class="dropdown-item">Exam List</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">Paper</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('add-paper')}}" class="dropdown-item">Add Paper</a></li>
+                            <li><a href="{{route('paper-list')}}" class="dropdown-item">Paper List</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
